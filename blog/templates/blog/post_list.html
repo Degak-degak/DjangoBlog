@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post list</title>
+</head>
+<body>
+<style>
+    a {
+    text-decoration:none
+    }
+</style>
+   <div style="">
+        <div style="margin: 30px;  ">
+            <a style=" text-align:center; font-size:40px; color:black " href="{% url 'post_list' %}">My learning blog</a>
+        </div>
+       <div style ="">
+             <div style="margin: 30px;  ">
+                <a style=" margin: 15px; font-size:17px; color:black; border: 1px solid; border-radius:15px; padding: 5px "
+                   href="{% url 'post_new' %}">
+                    Create new post
+                </a>
+                 <a style=" margin: 15px; font-size:17px; color:black; border: 1px solid; border-radius:15px; padding: 5px "
+                    href="{% url 'post_list' %}">
+                    Published posts
+                </a>
+                 <a style=" margin: 15px; font-size:17px; color:black; border: 1px solid; border-radius:15px; padding: 5px "
+                    href="{% url 'post_draft' %}">
+                    Draft posts
+                </a>
+            </div>
+       </div>
+
+<div>
+    <h2> Cateries:</h2>
+    {% for  i in categories %}
+    <a style=" margin: 10px; font-size:15px; color:grey; border: 1px solid; border-radius:15px; padding: 5px "
+        href="{% url 'categories' category_pk=i.pk %}">
+        {{i}}
+    </a>
+    {% endfor %}
+</div>
+<div style="margin: 15px">
+    <a> Posts total: {{ counter }}</a>
+</div>
+
+    {% for post in items %}
+    <div style="margin: 15px; display: inline-block">
+        <div style="border: 1px solid">
+            <a> {{ post.category }} </a>
+            <div style="margin: 15px; text-aling:center">
+                <a href="{% url 'post_detail' post_pk=post.pk%}">{{ post.title }}</a>
+            </div>
+            <div style="border-top:2px solid">
+                {{ post.publish_date }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>

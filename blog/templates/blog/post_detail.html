@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post list</title>
+</head>
+<body>
+<style>
+    a {
+    text-decoration:none
+    }
+</style>
+    <div style="text-align:center">
+        <div style="margin: 30px;  ">
+            <a style=" font-size:40px; color:black " href="{% url 'post_list' %}">My learning blog</a>
+        </div>
+         <div style="margin: 30px;  ">
+            <a style="margin: 5px; font-size:17px; color:green; border: 1px solid; border-radius:15px; padding: 5px "
+               href="{% url 'post_list' %}">
+                Back to main
+            </a>
+             <a style="margin: 5px; font-size:17px; color:green; border: 1px solid; border-radius:15px; padding: 5px "
+               href="{% url 'post_edit' post_pk=post.pk %}">
+                Edit post
+            </a>
+
+             {% if post.published == False %}
+             <a style="margin: 5px; font-size:17px; color:green; border: 1px solid; border-radius:15px; padding: 5px "
+               href="{% url 'publishing_post' post_pk=post.pk %}">
+                Publish
+            </a>
+             {% endif %}
+
+             <a style="margin: 5px; font-size:17px; color:green; border: 1px solid; border-radius:15px; padding: 5px "
+               href="{% url 'post_delete' post_pk=post.pk %}">
+                Delete
+            </a>
+        </div>
+    </div>
+
+
+
+     <div style="">
+        <div style="text-align:center">
+            <div style="">
+               <a>{{ post.publish_date }} </a>
+            </div>
+            <a> Category: {{ post.category }} </a>
+            <div style="margin: 15px; font-size:30px; text-align:center">
+                <p>{{ post.title }}</p>
+            </div>
+            <div style="margin-top: 30px; text-align:center">
+                <p>{{ post.text }}</p>
+            </div>
+
+        </div>
+    </div>
+
+<div>
+    <h2>Comments</h2> <a>Total: {{ counter }}</a>
+      <div style="margin-top: 30px; ">
+      {% for i in comments %}
+          <div style="font-size:12px">
+              {{ i.author }} <em>{{ i.publish_date}}</em>
+          </div>
+          <p>{{ i.text }}</p>
+      {% endfor %}
+  </div>
+</div>
+</body>
+</html>
